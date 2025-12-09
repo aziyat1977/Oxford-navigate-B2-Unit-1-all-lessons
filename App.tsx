@@ -36,16 +36,6 @@ const App: React.FC = () => {
         { type: SlideType.VOCAB_QUIZ, component: VocabQuizSlide, data: word }
     ]);
 
-    // LOGICAL ORDER:
-    // 1. Intro & Warm-up (Silence)
-    // 2. Speaking Skills (Conversation Rules & Idioms)
-    // 3. Grammar 1 (Question Forms)
-    // 4. Written Communication (Types & Stationery)
-    // 5. Grammar 2 (Present Perfect - in context of letters)
-    // 6. Vocabulary Skills (Collocations)
-    // 7. Full Unit Vocab Review
-    // 8. Production (Writing)
-
     const slides: { type: SlideType; component: React.FC<SlideProps>; data?: any }[] = [
         // --- SECTION 1.1: CONVERSATION ---
         { type: SlideType.INTRO, component: IntroSlide },
@@ -128,26 +118,26 @@ const App: React.FC = () => {
     const CurrentSlideComponent = currentSlide.component;
 
     return (
-        <div className="relative w-full h-screen bg-background overflow-hidden flex flex-col font-sans text-text selection:bg-primary selection:text-black">
+        <div className="relative w-screen h-screen bg-background overflow-hidden flex flex-col font-sans text-text selection:bg-primary selection:text-black">
             {/* Background Ambient Elements */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px]" />
-                <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-secondary/5 blur-[120px]" />
+                <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] rounded-full bg-primary/5 blur-[150px]" />
+                <div className="absolute bottom-[-20%] left-[-10%] w-[800px] h-[800px] rounded-full bg-secondary/5 blur-[150px]" />
             </div>
 
             <ProgressBar current={currentSlideIndex} total={slides.length} />
             
             <LanguageSwitcher current={lang} onChange={setLang} />
 
-            <main className="flex-1 relative z-10 w-full max-w-[1600px] mx-auto p-6 md:p-12 flex flex-col">
+            <main className="flex-1 relative z-10 w-full max-w-[1920px] mx-auto p-4 md:p-8 flex flex-col items-center justify-center">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentSlideIndex}
-                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        initial={{ opacity: 0, scale: 0.98, y: 10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 1.05, y: -20 }}
+                        exit={{ opacity: 0, scale: 1.02, y: -10 }}
                         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                        className="w-full h-full"
+                        className="w-full h-full flex items-center justify-center"
                     >
                         <CurrentSlideComponent 
                             isActive={true} 
@@ -166,7 +156,7 @@ const App: React.FC = () => {
                 canPrev={currentSlideIndex > 0}
             />
 
-            <div className="fixed bottom-4 right-6 text-dim text-xs opacity-50 font-mono hidden md:block">
+            <div className="fixed bottom-4 right-6 text-dim text-sm opacity-50 font-mono hidden md:block">
                 NAVIGATE B2 • {currentSlideIndex + 1} / {slides.length}
             </div>
         </div>
