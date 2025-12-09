@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 export type Language = 'en' | 'ru' | 'uz';
@@ -6,6 +7,21 @@ export interface SlideProps {
     isActive: boolean;
     onNext?: () => void;
     lang: Language;
+    // Optional data for dynamic slides
+    data?: any;
+}
+
+export interface VocabItem {
+    id: string;
+    word: string;
+    pronunciation: string;
+    partOfSpeech: string;
+    definitions: {
+        en: string;
+        ru: string;
+        uz: string;
+    };
+    examples: string[];
 }
 
 export enum SlideType {
@@ -37,8 +53,8 @@ export enum SlideType {
 
     // NEW TIMELINES & MFP 4 (PPC)
     MFP_GRAMMAR_PPC_INTRO,
-    TIMELINE_SIMPLE,      // NEW
-    TIMELINE_CONTINUOUS,  // NEW
+    TIMELINE_SIMPLE,      
+    TIMELINE_CONTINUOUS,  
     MFP_GRAMMAR_PPC_MEANING,
     MFP_GRAMMAR_PPC_EXAMPLES,
 
@@ -54,7 +70,12 @@ export enum SlideType {
     MFP_COLLOCATION_EXAMPLES,
 
     PREPOSITIONS,
-    EMAIL_TASK
+    EMAIL_TASK,
+
+    // DYNAMIC VOCAB SLIDES
+    VOCAB_SECTION_INTRO,
+    VOCAB_TEACHING,
+    VOCAB_QUIZ
 }
 
 export interface IdiomCard {
